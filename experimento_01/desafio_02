@@ -1,0 +1,74 @@
+// Semáforo de veículos
+int vermelhoVeiculos = 10;
+int amareloVeiculos = 9;
+int verdeVeiculos = 8;
+
+// Semáforo de pedestres
+int vermelhoPedestres = 7;
+int verdePedestres = 6;
+
+void setup() {
+  pinMode(vermelhoVeiculos, OUTPUT);
+  pinMode(amareloVeiculos, OUTPUT);
+  pinMode(verdeVeiculos, OUTPUT);
+
+  pinMode(vermelhoPedestres, OUTPUT);
+  pinMode(verdePedestres, OUTPUT);
+}
+
+void loop() {
+  // ESTADO 1: veículos podem passar
+  digitalWrite(vermelhoVeiculos, LOW);
+  digitalWrite(amareloVeiculos, LOW);
+  digitalWrite(verdeVeiculos, HIGH);
+
+  digitalWrite(vermelhoPedestres, HIGH);
+  digitalWrite(verdePedestres, LOW);
+
+  delay(8000);
+
+  // Desliga o verde dos veículos
+  digitalWrite(verdeVeiculos, LOW);
+
+  // ESTADO 2: amarelo pisca cinco vezes
+  // O vermelho dos pedestres continua aceso
+  for (int repeticao = 0; repeticao < 5; repeticao++) {
+    digitalWrite(amareloVeiculos, HIGH);
+    delay(500);
+
+    digitalWrite(amareloVeiculos, LOW);
+    delay(500);
+  }
+
+  // ESTADO 3: intervalo de segurança
+  digitalWrite(vermelhoVeiculos, HIGH);
+  digitalWrite(amareloVeiculos, LOW);
+  digitalWrite(verdeVeiculos, LOW);
+
+  digitalWrite(vermelhoPedestres, HIGH);
+  digitalWrite(verdePedestres, LOW);
+
+  delay(1000);
+
+  // ESTADO 4: pedestres podem atravessar
+  digitalWrite(vermelhoVeiculos, HIGH);
+  digitalWrite(amareloVeiculos, LOW);
+  digitalWrite(verdeVeiculos, LOW);
+
+  digitalWrite(vermelhoPedestres, LOW);
+  digitalWrite(verdePedestres, HIGH);
+
+  delay(6000);
+
+  // ESTADO 5: todos aguardam
+  digitalWrite(vermelhoVeiculos, HIGH);
+  digitalWrite(amareloVeiculos, LOW);
+  digitalWrite(verdeVeiculos, LOW);
+
+  digitalWrite(vermelhoPedestres, HIGH);
+  digitalWrite(verdePedestres, LOW);
+
+  delay(1000);
+
+  // O ciclo recomeça liberando os veículos
+}

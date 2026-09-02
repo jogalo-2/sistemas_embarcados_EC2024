@@ -1,0 +1,84 @@
+// Mapa LEDs
+int led1 = 8;   // 1º algarismo binário: valor 1
+int led2 = 9;   // 2º algarismo binário: valor 2
+int led3 = 10;  // 3º algarismo binário: valor 4
+
+void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+}
+
+void loop() {
+
+  // ESTADO 1 — Binário 001
+  digitalWrite(led3, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led1, HIGH);
+  delay(2000);
+
+  // ESTADO 2 — Binário 010
+  digitalWrite(led3, LOW);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led1, LOW);
+  delay(2000);
+
+  // ESTADO 3 — Binário 011
+  digitalWrite(led3, LOW);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led1, HIGH);
+  delay(2000);
+
+  // ESTADO 4 — Binário 100
+  digitalWrite(led3, HIGH);
+  digitalWrite(led2, LOW);
+  digitalWrite(led1, LOW);
+  delay(2000);
+
+  // ESTADO 5 — Binário 101
+  digitalWrite(led3, HIGH);
+  digitalWrite(led2, LOW);
+  digitalWrite(led1, HIGH);
+  delay(2000);
+
+  // ESTADO 6 — Binário 110
+  digitalWrite(led3, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led1, LOW);
+  delay(2000);
+
+  // ESTADO 7 — Binário 111
+  digitalWrite(led3, HIGH);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led1, HIGH);
+  delay(2000);
+
+  // Apaga todos os LEDs
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+
+  // Pisca LEDs
+  for (int repeticao = 0; repeticao < 10; repeticao++) {
+
+    // LED do pino 10
+    digitalWrite(led3, HIGH);
+    delay(100);
+    digitalWrite(led3, LOW);
+    delay(33);
+
+    // LED do pino 9
+    digitalWrite(led2, HIGH);
+    delay(100);
+    digitalWrite(led2, LOW);
+    delay(33);
+
+    // LED do pino 8
+    digitalWrite(led1, HIGH);
+    delay(100);
+    digitalWrite(led1, LOW);
+    delay(34);
+  }
+
+  // Depois do estado 8, o programa retorna ao estado 1
+}
