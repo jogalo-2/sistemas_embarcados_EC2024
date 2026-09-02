@@ -21,8 +21,8 @@ void loop()
 
     // ESTADO 2 esqueda ligada
   
-  digitalWrite(segundo, HIGH);
-  digitalWrite(terceiro, LOW);
+  digitalWrite(segundo, LOW);
+  digitalWrite(terceiro, HIGH);
   	
   delay(3000);
 }
