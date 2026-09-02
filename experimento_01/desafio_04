@@ -1,1 +1,28 @@
-//fiz no dedo modificando o desafio 03 XD
+// Leds
+const int terceiro = 10;
+const int segundo = 9;
+
+
+void setup()
+{
+  pinMode(segundo, OUTPUT);
+  pinMode(terceiro, OUTPUT);
+
+}
+
+void loop()
+{
+  // ESTADO 1 esqueda ligada
+  
+  digitalWrite(segundo, HIGH);
+  digitalWrite(terceiro, LOW);
+  
+  delay(3000);
+
+    // ESTADO 2 esqueda ligada
+  
+  digitalWrite(segundo, HIGH);
+  digitalWrite(terceiro, LOW);
+  	
+  delay(3000);
+}
