@@ -1,84 +1,89 @@
-// Mapa LEDs
-int led1 = 8;   // 1º algarismo binário: valor 1
-int led2 = 9;   // 2º algarismo binário: valor 2
-int led3 = 10;  // 3º algarismo binário: valor 4
+// Leds
+const int terceiro = 10;
+const int segundo = 9;
+const int primeiro = 8;
 
-void setup() {
-  pinMode(led1, OUTPUT);
-  pinMode(led2, OUTPUT);
-  pinMode(led3, OUTPUT);
+void setup()
+{
+  pinMode(primeiro, OUTPUT);
+  pinMode(segundo, OUTPUT);
+  pinMode(terceiro, OUTPUT);
+
 }
 
-void loop() {
+void loop()
+{
+  // ESTADO 1 = numero 0
+  digitalWrite(primeiro, LOW);
+  digitalWrite(segundo, LOW);
+  digitalWrite(terceiro, LOW);
+  
+  delay(5000);
 
-  // ESTADO 1 — Binário 001
-  digitalWrite(led3, LOW);
-  digitalWrite(led2, LOW);
-  digitalWrite(led1, HIGH);
-  delay(2000);
+    // ESTADO 2 = numero 1
+  digitalWrite(primeiro, HIGH);
+  digitalWrite(segundo, LOW);
+  digitalWrite(terceiro, LOW);
+  
+  delay(5000);
 
-  // ESTADO 2 — Binário 010
-  digitalWrite(led3, LOW);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led1, LOW);
-  delay(2000);
+    // ESTADO 3 = numero 2
+  digitalWrite(primeiro, LOW);
+  digitalWrite(segundo, HIGH);
+  digitalWrite(terceiro, LOW);
+  
+  delay(5000);
 
-  // ESTADO 3 — Binário 011
-  digitalWrite(led3, LOW);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led1, HIGH);
-  delay(2000);
+    // ESTADO 4 = numero 3
+  digitalWrite(primeiro, HIGH);
+  digitalWrite(segundo, HIGH);
+  digitalWrite(terceiro, LOW);
+  
+  delay(5000);
 
-  // ESTADO 4 — Binário 100
-  digitalWrite(led3, HIGH);
-  digitalWrite(led2, LOW);
-  digitalWrite(led1, LOW);
-  delay(2000);
+    // ESTADO 5 = numero 4
+  digitalWrite(primeiro, LOW);
+  digitalWrite(segundo, LOW);
+  digitalWrite(terceiro, HIGH);
+  
+  delay(5000);
 
-  // ESTADO 5 — Binário 101
-  digitalWrite(led3, HIGH);
-  digitalWrite(led2, LOW);
-  digitalWrite(led1, HIGH);
-  delay(2000);
+    // ESTADO 6 = numero 5
+  digitalWrite(primeiro, HIGH);
+  digitalWrite(segundo, LOW);
+  digitalWrite(terceiro, HIGH);
+  
+  delay(5000);
 
-  // ESTADO 6 — Binário 110
-  digitalWrite(led3, HIGH);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led1, LOW);
-  delay(2000);
+    // ESTADO 7 = numero 6
+  digitalWrite(primeiro, LOW);
+  digitalWrite(segundo, HIGH);
+  digitalWrite(terceiro, HIGH);
+  
+  delay(5000);
 
-  // ESTADO 7 — Binário 111
-  digitalWrite(led3, HIGH);
-  digitalWrite(led2, HIGH);
-  digitalWrite(led1, HIGH);
-  delay(2000);
-
-  // Apaga todos os LEDs
-  digitalWrite(led1, LOW);
-  digitalWrite(led2, LOW);
-  digitalWrite(led3, LOW);
-
-  // Pisca LEDs
-  for (int repeticao = 0; repeticao < 10; repeticao++) {
-
-    // LED do pino 10
-    digitalWrite(led3, HIGH);
-    delay(100);
-    digitalWrite(led3, LOW);
-    delay(33);
-
-    // LED do pino 9
-    digitalWrite(led2, HIGH);
-    delay(100);
-    digitalWrite(led2, LOW);
-    delay(33);
-
-    // LED do pino 8
-    digitalWrite(led1, HIGH);
-    delay(100);
-    digitalWrite(led1, LOW);
-    delay(34);
+    // ESTADO 8 = numero 7
+  digitalWrite(primeiro, HIGH);
+  digitalWrite(segundo, HIGH);
+  digitalWrite(terceiro, HIGH);
+  
+  delay(5000);
+  for(int i = 0; i < 5; i++){
+  digitalWrite(primeiro, HIGH);
+  digitalWrite(segundo, LOW);
+  digitalWrite(terceiro, LOW);
+	delay(150);
+	
+  digitalWrite(primeiro, LOW);
+  digitalWrite(segundo, HIGH);
+  digitalWrite(terceiro, LOW);
+  delay(150);
+  
+  digitalWrite(primeiro, LOW);
+  digitalWrite(segundo, LOW);
+  digitalWrite(terceiro, HIGH);
+  delay(150);
+  
   }
-
-  // Depois do estado 8, o programa retorna ao estado 1
+  delay(2000);
 }
