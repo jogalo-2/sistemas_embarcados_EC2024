@@ -1,0 +1,20 @@
+const int led = 12;
+const int potPin = A2;
+
+void setup()
+{
+    pinMode(led, OUTPUT);
+}
+
+void loop()
+{
+    int valorPot = analogRead(potPin);
+
+    // ligado
+    digitalWrite(led, HIGH);
+    delay(valorPot);
+
+    // desligado
+    digitalWrite(led, LOW);
+    delay(valorPot);
+}
