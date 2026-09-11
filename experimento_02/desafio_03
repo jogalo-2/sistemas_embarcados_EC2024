@@ -4,11 +4,18 @@ const int potPin = A2;
 void setup()
 {
     pinMode(led, OUTPUT);
+
+    // Inicia comunicação com o Monitor Serial
+    Serial.begin(9600);
 }
 
 void loop()
 {
     int valorPot = analogRead(potPin);
+
+    // Mostra o valor do potenciômetro
+    Serial.print("Valor do potenciometro: ");
+    Serial.println(valorPot);
 
     // ligado
     digitalWrite(led, HIGH);
