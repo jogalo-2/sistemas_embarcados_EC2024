@@ -1,0 +1,137 @@
+% Modelo reutilizavel para a disciplina Sistemas Embarcados com Arduino.
+% Copie este arquivo para cada experimento e substitua os campos entre colchetes.
+% Adapte secoes e atividades ao enunciado. Nao apresente exemplos como dados medidos.
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{left=3cm,right=2cm,top=3cm,bottom=2cm}
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0pt}
+
+% Edite estes campos em cada novo relatorio.
+\newcommand{\NumeroExperimento}{[numero]}
+\newcommand{\TemaExperimento}{[tema do experimento]}
+\newcommand{\AutorUm}{João Gabriel Lourenço}
+\newcommand{\AutorDois}{[confirmar nome completo do segundo autor]}
+\newcommand{\Cidade}{Marabá -- PA}
+\newcommand{\AnoRelatorio}{2026}
+
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+  language=C++,
+  basicstyle=\ttfamily\footnotesize,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=false,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    Universidade Federal do Sul e Sudeste do Pará\\[0.5cm]
+    Faculdade de Engenharia da Computação\\[0.5cm]
+    Sistemas Embarcados com Arduino -- Prof. Dr. Elton Alves
+
+    \vfill
+    {\LARGE\bfseries Relatório do Experimento \NumeroExperimento\par}
+    \vspace{0.7cm}
+    {\Large \TemaExperimento\par}
+
+    \vfill
+    \AutorUm\\[0.4cm]
+    \AutorDois
+
+    \vfill
+    \Cidade\\[0.4cm]
+    \AnoRelatorio
+  \end{center}
+\end{titlepage}
+
+\setcounter{page}{1}
+
+\section{Introdução}
+\textit{[Apresente o objetivo do experimento, o problema estudado e o que foi realmente realizado. Não copie resultados de relatórios anteriores.]}
+
+\section{Materiais utilizados}
+\begin{itemize}
+  \item \textit{[Placa e componentes efetivamente usados.]}
+  \item \textit{[Instrumentos, simulador e software, quando utilizados.]}
+\end{itemize}
+
+% Duplique a secao abaixo para cada projeto guiado, desafio ou tarefa avaliativa.
+% Ajuste os titulos e subsecoes conforme o enunciado correspondente.
+\section{[Projeto ou tarefa] -- [nome]}
+
+\subsection{Objetivo e solução proposta}
+\textit{[Descreva o requisito e a solução implementada. Distinga planejamento de funcionamento observado.]}
+
+\subsection{Montagem}
+\textit{[Descreva conexões, pinos, resistores, alimentação e demais componentes. Inclua uma imagem real ou esquema verificado quando disponível.]}
+
+% Exemplo para inserir uma figura existente na mesma pasta do arquivo .tex:
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{montagem.png}
+%   \caption{Montagem da atividade.}
+%   \label{fig:montagem-atividade}
+% \end{figure}
+
+\subsection{Código-fonte}
+% Substitua pelo codigo efetivamente utilizado. Confira a versao no GitHub.
+\begin{lstlisting}[caption={Código da atividade},label={lst:atividade}]
+// Inserir aqui o codigo Arduino efetivamente utilizado.
+\end{lstlisting}
+
+\subsection{Explicação passo a passo}
+\textit{[Explique as variáveis, setup(), loop(), entradas, saídas, decisões e temporização do código inserido.]}
+
+\subsection{Histórico de implementação}
+\textit{[Registre tentativas, erros, testes e soluções que ocorreram de fato. Se não houve dificuldade relevante, informe isso de modo objetivo.]}
+
+% Se houver medicoes, substitua o exemplo abaixo por dados reais.
+\subsection{Medições e análise}
+\begin{table}[H]
+  \centering
+  \caption{Registros da atividade.}
+  \label{tab:medicoes-atividade}
+  \begin{tabular}{p{0.30\textwidth}p{0.30\textwidth}p{0.25\textwidth}}
+    \toprule
+    Condição & Leitura & Observação \\
+    \midrule
+    \textit{[preencher]} & \textit{[preencher]} & \textit{[preencher]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\textit{[Explique o método de obtenção dos dados e analise a relação entre as grandezas. Insira equações e gráfico quando o enunciado exigir.]}
+
+\section{Resultados}
+\textit{[Sintetize o que foi observado em todas as atividades e compare com os objetivos. Não declare como testado o que foi apenas simulado ou planejado.]}
+
+\section{Conclusão}
+\textit{[Retome os objetivos, os principais resultados verificados e as limitações. Não introduza dados novos.]}
+
+\section{Vídeo das atividades}
+\textit{[Insira o link verificável do vídeo exigido pelo enunciado, se aplicável.]}
+
+\section{Declaração de uso de Inteligência Artificial}
+\textit{[Informe o nível de uso de IA definido no enunciado da atividade e descreva com precisão como as ferramentas foram utilizadas. Não reutilize automaticamente a declaração de um relatório anterior.]}
+
+\end{document}
