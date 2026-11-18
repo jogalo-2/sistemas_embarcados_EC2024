@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "author": "Sistemas Embarcados EC2024 - Experimento 7",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-resistor", "id": "r1", "top": 140, "left": 160, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 120, "left": 160, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led1", "top": 60, "left": 290, "attrs": { "color": "red", "label": "Vermelho (GPIO2)" } },
+    { "type": "wokwi-led", "id": "led2", "top": 60, "left": 360, "attrs": { "color": "yellow", "label": "Amarelo (GPIO4)" } }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:D2", "r1:1", "red", [] ],
+    [ "r1:2", "led1:A", "red", [] ],
+    [ "led1:C", "esp:GND.1", "black", [] ],
+    [ "esp:D4", "r2:1", "gold", [] ],
+    [ "r2:2", "led2:A", "gold", [] ],
+    [ "led2:C", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

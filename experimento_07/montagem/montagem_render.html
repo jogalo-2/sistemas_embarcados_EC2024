@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://unpkg.com/@wokwi/elements@1.9.1/dist/wokwi-elements.bundle.js"></script>
+<style>
+  body { margin:0; overflow:hidden; background:#fff; font-family: Arial, Helvetica, sans-serif; }
+  #board { position:relative; width:900px; height:520px; background:#f7f7f7; }
+  .part { position:absolute; }
+  h1 { position:absolute; left:20px; top:8px; margin:0; font-size:20px; color:#222; }
+  .sub { position:absolute; left:20px; top:34px; font-size:13px; color:#555; }
+  .lbl { position:absolute; font-size:13px; font-weight:bold; color:#222; }
+  #legend { position:absolute; left:60px; top:375px; font-size:13px; border-collapse:collapse; background:#fff; }
+  #legend td, #legend th { border:1px solid #bbb; padding:4px 8px; }
+  #legend th { background:#e8e8e8; }
+  svg#wires { position:absolute; left:0; top:0; pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="board">
+  <h1>Experimento 7 - Uso dos nucleos do ESP32 (montagem)</h1>
+  <div class="sub">ESP32 DevKit V1 | LED vermelho: GPIO 2 (Nucleo 0, 500 ms) | LED amarelo: GPIO 4 (Nucleo 1, 300 ms) | resistores 220 &Omega;</div>
+  <wokwi-esp32-devkit-v1 id="esp" class="part" style="left:60px; top:90px"></wokwi-esp32-devkit-v1>
+  <wokwi-resistor id="r1" class="part" value="220"></wokwi-resistor>
+  <wokwi-resistor id="r2" class="part" value="220"></wokwi-resistor>
+  <wokwi-led id="led1" class="part" color="red" value="1"></wokwi-led>
+  <wokwi-led id="led2" class="part" color="yellow" value="1"></wokwi-led>
+  <div class="lbl" id="l1">LED vermelho<br>(TASK1 - GPIO 2)</div>
+  <div class="lbl" id="l2">LED amarelo<br>(TASK2 - GPIO 4)</div>
+  <div class="lbl" id="lr1">R1 220 &Omega;</div>
+  <div class="lbl" id="lr2">R2 220 &Omega;</div>
+  <table id="legend">
+    <tr><th>ESP32</th><th>Ligacao</th></tr>
+    <tr><td>GPIO 2 (D2)</td><td>R1 220 &Omega; &rarr; anodo LED vermelho</td></tr>
+    <tr><td>GPIO 4 (D4)</td><td>R2 220 &Omega; &rarr; anodo LED amarelo</td></tr>
+    <tr><td>GND</td><td>catodos dos dois LEDs</td></tr>
+    <tr><td>USB</td><td>Monitor Serial 115200 baud</td></tr>
+  </table>
+  <svg id="wires" width="900" height="560"></svg>
+</div>
+<script type="module">
+  await customElements.whenDefined('wokwi-esp32-devkit-v1');
+  await customElements.whenDefined('wokwi-led');
+  await customElements.whenDefined('wokwi-resistor');
+  await new Promise(r => setTimeout(r, 500));
+
+  const board = document.getElementById('board').getBoundingClientRect();
+  const $ = id => document.getElementById(id);
+  function pin(id, name) {
+    const el = $(id), r = el.getBoundingClientRect();
+    const p = el.pinInfo.find(p => p.name === name);
+    return { x: r.left - board.left + p.x, y: r.top - board.top + p.y };
+  }
+  function place(id, x, y) { const e = $(id); e.style.left = x + 'px'; e.style.top = y + 'px'; }
+  function placeByPin(id, name, x, y) {
+    const e = $(id); e.style.left = '0px'; e.style.top = '0px';
+    const r = e.getBoundingClientRect();
+    const p = e.pinInfo.find(p => p.name === name);
+    place(id, x - p.x, y - p.y);
+  }
+
+  const d2 = pin('esp', 'D2'), d4 = pin('esp', 'D4'), gnd = pin('esp', 'GND.1');
+
+  // resistores alinhados com os pinos
+  placeByPin('r2', '1', d4.x + 120, d4.y - 40);
+  placeByPin('r1', '1', d2.x + 120, d2.y + 40);
+  await new Promise(r => setTimeout(r, 50));
+  const r1a = pin('r1','1'), r1b = pin('r1','2'), r2a = pin('r2','1'), r2b = pin('r2','2');
+
+  // LEDs acima/a direita dos resistores
+  placeByPin('led1', 'A', r1b.x + 150, r1b.y - 20);
+  placeByPin('led2', 'A', r2b.x + 270, r2b.y - 20);
+  await new Promise(r => setTimeout(r, 50));
+  const l1a = pin('led1','A'), l1c = pin('led1','C'), l2a = pin('led2','A'), l2c = pin('led2','C');
+
+  const svg = $('wires');
+  function wire(pts, color) {
+    const pl = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+    pl.setAttribute('points', pts.map(p => p.x + ',' + p.y).join(' '));
+    pl.setAttribute('fill', 'none'); pl.setAttribute('stroke', color);
+    pl.setAttribute('stroke-width', '3'); pl.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(pl);
+    for (const p of [pts[0], pts[pts.length-1]]) {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', p.x); c.setAttribute('cy', p.y); c.setAttribute('r', 3.5);
+      c.setAttribute('fill', color); svg.appendChild(c);
+    }
+  }
+  const mx = d2.x + 40;
+  // GPIO2 -> R1 -> LED vermelho
+  wire([d2, {x: mx + 20, y: d2.y}, {x: mx + 20, y: r1a.y}, r1a], '#d32f2f');
+  wire([r1b, {x: l1a.x, y: r1b.y}, l1a], '#d32f2f');
+  // GPIO4 -> R2 -> LED amarelo
+  wire([d4, {x: mx, y: d4.y}, {x: mx, y: r2a.y}, r2a], '#e0a800');
+  wire([r2b, {x: l2a.x, y: r2b.y}, l2a], '#e0a800');
+  // catodos -> GND
+  const gy = Math.max(r1a.y, gnd.y) + 70;
+  wire([l1c, {x: l1c.x, y: gy}, {x: gnd.x + 20, y: gy}, {x: gnd.x + 20, y: gnd.y}, gnd], '#111');
+  wire([l2c, {x: l2c.x, y: gy}, {x: l1c.x, y: gy}], '#111');
+  const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  t.setAttribute('x', gnd.x + 30); t.setAttribute('y', gy + 18); t.setAttribute('font-size', '13');
+  t.setAttribute('font-weight', 'bold'); t.textContent = 'GND'; svg.appendChild(t);
+
+  // rotulos
+  const L = (id, x, y) => { $(id).style.left = x + 'px'; $(id).style.top = y + 'px'; };
+  L('l1', l1a.x - 150, l1a.y - 38);
+  L('l2', l2a.x + 25, l2a.y - 60);
+  L('lr1', r1a.x + 10, r1a.y + 12);
+  L('lr2', r2a.x + 10, r2a.y - 30);
+  document.title = 'READY';
+</script>
+</body>
+</html>
+
+
+
+
